@@ -1,0 +1,91 @@
+package autoComplete;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import com.mxrck.autocompleter.TextAutoCompleter;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class autoComplete extends JFrame {
+
+	private final JPanel contentPanel = new JPanel();
+	private JTextField tfTexto;
+	private TextAutoCompleter ac;
+	private JPanel contentPane;
+	private JTextField textField;
+	private JButton btnNewButton;
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					autoComplete frame = new autoComplete();
+					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public autoComplete() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 451, 145);
+		contentPane = new JPanel();
+		getContentPane().setLayout(new BorderLayout());
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPane, BorderLayout.CENTER);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("t\u00ECm ki\u1EBFm");
+		lblNewLabel.setBounds(27, 40, 67, 23);
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 15));
+		contentPane.add(lblNewLabel);
+		
+		textField = new JTextField();
+		ac = new TextAutoCompleter(textField);
+//		ac.addItem("GABRIEL GONZALEZ ROJAS");
+//		ac.addItem("SUSCRIBETE");
+//		ac.addItem("GABRIEL XDXD");
+		textField.setBounds(156, 40, 176, 22);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("let right!");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CargarAutoCompleter(); // gọi tên nơi chứa dữ liệu cần search , kích hoạt autoComple JTextField ( gợi ý nội dung cho JTextField)
+			}
+		});
+		btnNewButton.setBounds(149, 72, 89, 23);
+		contentPane.add(btnNewButton);
+	}
+	
+	// tạo chỗ lưu dữ liệu , t đang tạo ra cái tự tạo, khi m cho code vào thì trích xuất dữ liệu name_account_admin vào đây để dùng autoComplete Search 
+	private void CargarAutoCompleter() {  
+		// TODO Auto-generated method stub
+		String [] valores = {"AAAA", "AAAA", "BBBB", "BBBBB", "CCCC", "CCCCC", "cccccc", "ccc", "SSSS", "GABRIEL", "GONZALEZ", "ROJAS", "SUCRIBETE"}; 
+		for(int i =0; i < valores.length;i++){
+			ac.addItem(valores[i]);
+		}
+	}
+	
+}
